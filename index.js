@@ -52,42 +52,6 @@ function serialize (node, context, fn, eventTarget) {
     rtn = exports.serializeNodeList(node, context, fn);
   } else {
 
-    if ('function' === typeof fn) {
-      // one-time "serialize" event listener
-      node.addEventListener('serialize', fn, false);
-    }
-
-    // emit a custom "serialize" event on `node`, in case there
-    // are event listeners for custom serialization of this node
-    var e = new CustomEvent('serialize', {
-      bubbles: true,
-      cancelable: true,
-      detail: {
-        serialize: null,
-        context: context
-      }
-    });
-
-    e.serializeTarget = node;
-
-    var target = eventTarget || node;
-    var cancelled = !target.dispatchEvent(e);
-
-    // `e.detail.serialize` can be set to a:
-    //   String - returned directly
-    //   Node   - goes through serializer logic instead of `node`
-    //   Anything else - get Stringified first, and then returned directly
-    var s = e.detail.serialize;
-    if (s != null) {
-      if ('string' === typeof s) {
-        rtn = s;
-      } else if ('number' === typeof s.nodeType) {
-        // make it go through the serialization logic
-        rtn = serialize(s, context, null, target);
-      } else {
-        rtn = String(s);
-      }
-    } else if (!cancelled) {
       // default serialization logic
       switch (nodeType) {
         case 1 /* element */:
@@ -112,11 +76,7 @@ function serialize (node, context, fn, eventTarget) {
           rtn = exports.serializeDocumentFragment(node, context, eventTarget);
           break;
       }
-    }
-
-    if ('function' === typeof fn) {
-      node.removeEventListener('serialize', fn, false);
-    }
+    
   }
 
   return rtn || '';

@@ -1,6 +1,6 @@
 {
-  "name": "dom-serialize",
-  "version": "2.2.0",
+  "name": "serialize-dom",
+  "version": "3.0.0",
   "description": "Serializes any DOM node into a String",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/webmodules/dom-serialize.git"
+    "url": "git://github.com/marcelklehr/serialize-dom.git"
   },
   "keywords": [
     "browser",
@@ -20,11 +20,10 @@
   "author": "Nathan Rajlich <nathan@tootallnate.net> (http://n8.io/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/webmodules/dom-serialize/issues"
+    "url": "https://github.com/marcelklehr/serialize-dom/issues"
   },
-  "homepage": "https://github.com/webmodules/dom-serialize",
+  "homepage": "https://github.com/marcelklehr/serialize-dom",
   "dependencies": {
-    "custom-event": "~1.0.0",
     "ent": "~2.2.0",
     "extend": "~2.0.0",
     "void-elements": "~1.0.0"
