@@ -125,7 +125,10 @@ function serializeElement (node, context, eventTarget) {
  */
 
 function serializeText (node, opts) {
-  return '<![CDATA['+node.nodeValue+']]>'
+  return encode(node.nodeValue, extend({
+    named: true,
+    special: { '<': true, '>': true, '&': true }
+  }, opts));
 }
 
 /**
